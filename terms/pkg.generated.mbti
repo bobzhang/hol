@@ -1,0 +1,54 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol/terms"
+
+import {
+  "bobzhang/hol/foundation",
+  "bobzhang/hol/types",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn const_(String, @types.Type) -> Term
+
+pub fn mk_app(Term, Term) -> Term
+
+pub fn mk_var(String, @types.Type) -> Term
+
+// Errors
+
+// Types and methods
+pub enum Term {
+  FVar(String, @types.Type)
+  BVar(Int)
+  Const(String, @types.Type)
+  App(Term, Term)
+  Abs(Term, Term)
+}
+pub fn Term::aconv(Self, Self) -> Bool
+pub fn Term::curry_eq(Self) -> Self
+pub fn Term::dest_abs(Self) -> (Self, Self)
+pub fn Term::dest_eq(Self) -> (Self, Self) raise
+pub fn Term::inst(Self, @foundation.Subst[@types.Type, @types.Type]) -> Self
+pub fn Term::is_bool(Self) -> Bool
+pub fn Term::is_eq(Self) -> Bool
+pub fn Term::match_term(Self, Self) -> (@foundation.Subst[Self, Self], @foundation.Subst[@types.Type, @types.Type]) raise
+pub fn Term::mk_abs(Self, Self) -> Self
+pub fn Term::mk_const(String, @types.Type) -> Self raise
+pub fn Term::mk_eq(Self, Self) -> Self
+pub fn Term::new_const(String, @types.Type) -> Self
+pub fn Term::pprint(Self) -> String
+pub fn Term::reset_table() -> Unit
+pub fn Term::subst(Self, @foundation.Subst[Self, Self]) -> Self
+pub fn Term::type_of(Self) -> @types.Type
+pub impl Compare for Term
+pub impl Eq for Term
+pub impl Show for Term
+pub impl @debug.Debug for Term
+
+// Type aliases
+pub type TermMatchResult = (@foundation.Subst[Term, Term], @foundation.Subst[@types.Type, @types.Type])
+
+pub type TermSubst = @foundation.Subst[Term, Term]
+
+// Traits
+

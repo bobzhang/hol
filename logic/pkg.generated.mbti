@@ -1,0 +1,90 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol/logic"
+
+import {
+  "bobzhang/hol/foundation",
+  "bobzhang/hol/terms",
+  "bobzhang/hol/types",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub enum BoolSyntax {
+}
+pub fn BoolSyntax::conjunction() -> @terms.Term
+pub fn BoolSyntax::dest_conj(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_disj(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_eq(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_ex_unique(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_exists(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_forall(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_imp(@terms.Term) -> (@terms.Term, @terms.Term)
+pub fn BoolSyntax::dest_neg(@terms.Term) -> @terms.Term
+pub fn BoolSyntax::disjunction() -> @terms.Term
+pub fn BoolSyntax::equality() -> @terms.Term
+pub fn BoolSyntax::ex_unique() -> @terms.Term
+pub fn BoolSyntax::existential() -> @terms.Term
+pub fn BoolSyntax::falsum() -> @terms.Term
+pub fn BoolSyntax::implication() -> @terms.Term
+pub fn BoolSyntax::is_conj(@terms.Term) -> Bool
+pub fn BoolSyntax::is_disj(@terms.Term) -> Bool
+pub fn BoolSyntax::is_eq(@terms.Term) -> Bool
+pub fn BoolSyntax::is_ex_unique(@terms.Term) -> Bool
+pub fn BoolSyntax::is_exists(@terms.Term) -> Bool
+pub fn BoolSyntax::is_forall(@terms.Term) -> Bool
+pub fn BoolSyntax::is_imp(@terms.Term) -> Bool
+pub fn BoolSyntax::is_ind(@terms.Term) -> Bool
+pub fn BoolSyntax::is_neg(@terms.Term) -> Bool
+pub fn BoolSyntax::mk_conj(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_disj(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_ex_unique(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_exists(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_forall(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_imp(@terms.Term, @terms.Term) -> @terms.Term
+pub fn BoolSyntax::mk_neg(@terms.Term) -> @terms.Term
+pub fn BoolSyntax::negation() -> @terms.Term
+pub fn BoolSyntax::universal() -> @terms.Term
+pub fn BoolSyntax::verum() -> @terms.Term
+
+pub enum Equal {
+}
+pub fn Equal::alpha(@terms.Term, @terms.Term) -> Thm raise
+pub fn Equal::apTerm(@terms.Term, Thm) -> Thm raise
+pub fn Equal::apThm(@terms.Term, Thm) -> Thm raise
+pub fn Equal::mkBinop(@terms.Term, Thm, Thm) -> Thm raise
+pub fn Equal::sym(Thm) -> Thm raise
+pub fn Equal::trans(Thm, Thm) -> Thm raise
+pub fn Equal::trans_fast(Thm, Thm) -> Thm raise
+
+pub enum Kernel {
+}
+pub fn Kernel::absThm(@terms.Term, Thm) -> Thm raise
+pub fn Kernel::appThm(Thm, Thm) -> Thm raise
+pub fn Kernel::assume(@terms.Term) -> Thm
+pub fn Kernel::betaConv(@terms.Term, @terms.Term) -> Thm
+pub fn Kernel::deductAntisym(Thm, Thm) -> Thm
+pub fn Kernel::defineConst(String, @terms.Term) -> Thm
+pub fn Kernel::defineTypeOp(name~ : String, abs~ : String, rep~ : String, tyvars~ : Array[String], Thm) -> (Thm, Thm)
+pub fn Kernel::eqMp(Thm, Thm) -> Thm raise
+pub fn Kernel::new_axiom(@terms.Term) -> Thm
+pub fn Kernel::refl(@terms.Term) -> Thm
+pub fn Kernel::reset_axioms() -> Unit
+pub fn Kernel::termSubst(@foundation.Subst[@terms.Term, @terms.Term], Thm) -> Thm
+pub fn Kernel::typeSubst(@foundation.Subst[@types.Type, @types.Type], Thm) -> Thm
+
+pub struct Thm {
+  hyps : Array[@terms.Term]
+  concl : @terms.Term
+
+  fn new(Array[@terms.Term], @terms.Term) -> Thm
+}
+pub impl Eq for Thm
+pub impl Show for Thm
+
+// Type aliases
+
+// Traits
+

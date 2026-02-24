@@ -1,0 +1,6 @@
+import {
+  "bobzhang/hol/foundation",
+  "moonbitlang/core/immut/sorted_map",
+}
+
+warnings = "+missing_doc+test_unqualified_package+unqualified_local_using"

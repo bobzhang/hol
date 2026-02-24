@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol/types"
+
+import {
+  "bobzhang/hol/foundation",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/immut/sorted_map",
+}
+
+// Values
+pub fn bool_ty() -> Type
+
+pub fn ind_ty() -> Type
+
+pub fn mk_fun(Type, Type) -> Type
+
+pub fn mk_var(String) -> Type
+
+// Errors
+
+// Types and methods
+pub enum Type {
+  TyVar(String)
+  TyApp(String, Array[Type])
+}
+pub fn Type::checkpoint_defs() -> Unit
+pub fn Type::dest_fun(Self) -> (Self, Self)
+pub fn Type::dest_type(Self) -> (String, Array[Self])
+pub fn Type::dest_var(Self) -> String
+pub fn Type::domain(Self) -> Self
+pub fn Type::is_fun(Self) -> Bool
+pub fn Type::is_type(Self) -> Bool
+pub fn Type::is_var(Self) -> Bool
+pub fn Type::match_type(Self, Self, TypeMatchState) -> TypeMatchState raise
+pub fn Type::mk_type(String, Array[Self]) -> Self
+pub fn Type::new_type(String, Int) -> Unit
+pub fn Type::pprint(Self) -> String
+pub fn Type::range(Self) -> Self
+pub fn Type::reset_table() -> Unit
+pub fn Type::serialize(Self) -> String
+pub fn Type::subst(Self, @foundation.Subst[Self, Self]) -> Self
+pub fn Type::vars_in(Self) -> Array[Self]
+pub impl Compare for Type
+pub impl Eq for Type
+pub impl Show for Type
+pub impl @debug.Debug for Type
+
+pub(all) struct TypeMatchState {
+  subst : @foundation.Subst[Type, Type]
+  tyvars : Array[Type]
+}
+
+// Type aliases
+pub type Env = @sorted_map.SortedMap[String, Int]
+
+pub type TypeSubst = @foundation.Subst[Type, Type]
+
+// Traits
+

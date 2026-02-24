@@ -1,0 +1,7 @@
+import {
+  "bobzhang/hol/foundation",
+  "bobzhang/hol/types",
+  "bobzhang/hol/terms",
+}
+
+warnings = "+missing_doc+test_unqualified_package+unqualified_local_using"

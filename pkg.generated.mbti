@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol"
+
+import {
+  "bobzhang/hol/foundation",
+  "bobzhang/hol/logic",
+  "bobzhang/hol/terms",
+  "bobzhang/hol/types",
+}
+
+// Values
+pub fn bool_ty() -> @types.Type
+
+pub fn const_(String, @types.Type) -> @terms.Term
+
+pub fn ind_ty() -> @types.Type
+
+pub fn mk_app(@terms.Term, @terms.Term) -> @terms.Term
+
+pub fn mk_fun(@types.Type, @types.Type) -> @types.Type
+
+pub fn mk_var(String, @types.Type) -> @terms.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @logic {type BoolSyntax}
+
+pub using @logic {type Equal}
+
+pub using @logic {type Kernel}
+
+pub using @foundation {type Subst}
+
+pub using @terms {type Term}
+
+pub type TermMatchResult = (@foundation.Subst[@terms.Term, @terms.Term], @foundation.Subst[@types.Type, @types.Type])
+
+pub type TermSubst = @foundation.Subst[@terms.Term, @terms.Term]
+
+pub using @logic {type Thm}
+
+pub using @types {type Type}
+
+pub using @types {type TypeMatchState}
+
+pub type TypeSubst = @foundation.Subst[@types.Type, @types.Type]
+
+// Traits
+

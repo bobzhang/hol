@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol/foundation"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn[A : Compare] dedup_sort(Array[A]) -> Array[A]
+
+// Errors
+
+// Types and methods
+pub struct Subst[A, B] {
+  // private fields
+
+  fn[A, B] new(pairs? : ArrayView[(A, B)]) -> Subst[A, B]
+}
+pub fn[A, B] Subst::add(Self[A, B], A, B) -> Self[A, B]
+pub fn[A : Eq, B] Subst::contains(Self[A, B], A) -> Bool
+pub fn[A, B] Subst::is_empty(Self[A, B]) -> Bool
+pub fn[A, B] Subst::iter(Self[A, B]) -> Iter[(A, B)]
+pub fn[A : Eq, B] Subst::lookup(Self[A, B], A) -> B?
+pub impl[A : @debug.Debug, B : @debug.Debug] @debug.Debug for Subst[A, B]
+
+// Type aliases
+
+// Traits
+
