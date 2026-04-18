@@ -22,7 +22,7 @@ pub enum Type {
   TyVar(String)
   // Type constructor applied to arguments (e.g., `App("fun", [bool, bool])`)
   TyApp(String, Array[Type])
-} derive(Eq, Compare, Show, Debug)
+} derive(Eq, Compare, Debug)
 
 ///|
 /// A substitution mapping type variables to types.
@@ -210,4 +210,9 @@ pub fn Type::vars_in(self : Type) -> Array[Type] {
       @foundation.dedup_sort(vars)
     }
   }
+}
+
+///|
+pub impl Show for Type with output(self, logger) {
+  logger.write_string(self.pprint())
 }

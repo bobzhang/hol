@@ -114,7 +114,10 @@ pub fn BoolSyntax::negation() -> @terms.Term {
 
 ///|
 /// Construct an implication `p ==> q`, checking that both arguments have Boolean type.
-pub fn BoolSyntax::mk_imp(ant : @terms.Term, conseq : @terms.Term) -> @terms.Term {
+pub fn BoolSyntax::mk_imp(
+  ant : @terms.Term,
+  conseq : @terms.Term,
+) -> @terms.Term {
   if !ant.is_bool() {
     abort("mk_imp: antecedent is not bool")
   }
@@ -140,7 +143,11 @@ test "BoolSyntax: implication" {
 // abstractions.  E.g., `forall x. P x` is `(forall) (\x. P x)`.  We
 // instantiate the polymorphic quantifier constant to the bound variable's
 // type before applying it.
-fn boolsyntax_mk_binder(ctor : @terms.Term, bv : @terms.Term, body : @terms.Term) -> @terms.Term {
+fn boolsyntax_mk_binder(
+  ctor : @terms.Term,
+  bv : @terms.Term,
+  body : @terms.Term,
+) -> @terms.Term {
   let a = boolsyntax_a()
   let sigma : @types.TypeSubst = Subst(pairs=[(a, bv.type_of())])
   @terms.mk_app(ctor.inst(sigma), @terms.Term::mk_abs(bv, body))
@@ -148,19 +155,28 @@ fn boolsyntax_mk_binder(ctor : @terms.Term, bv : @terms.Term, body : @terms.Term
 
 ///|
 /// Construct a universal quantification `forall x. body`.
-pub fn BoolSyntax::mk_forall(bv : @terms.Term, body : @terms.Term) -> @terms.Term {
+pub fn BoolSyntax::mk_forall(
+  bv : @terms.Term,
+  body : @terms.Term,
+) -> @terms.Term {
   boolsyntax_mk_binder(BoolSyntax::universal(), bv, body)
 }
 
 ///|
 /// Construct an existential quantification `exist x. body`.
-pub fn BoolSyntax::mk_exists(bv : @terms.Term, body : @terms.Term) -> @terms.Term {
+pub fn BoolSyntax::mk_exists(
+  bv : @terms.Term,
+  body : @terms.Term,
+) -> @terms.Term {
   boolsyntax_mk_binder(BoolSyntax::existential(), bv, body)
 }
 
 ///|
 /// Construct a unique existence quantification `?! x. body`.
-pub fn BoolSyntax::mk_ex_unique(bv : @terms.Term, body : @terms.Term) -> @terms.Term {
+pub fn BoolSyntax::mk_ex_unique(
+  bv : @terms.Term,
+  body : @terms.Term,
+) -> @terms.Term {
   boolsyntax_mk_binder(BoolSyntax::ex_unique(), bv, body)
 }
 
@@ -243,7 +259,9 @@ pub fn BoolSyntax::dest_exists(fm : @terms.Term) -> (@terms.Term, @terms.Term) {
 
 ///|
 /// Decompose a unique existence `?! x. body` into the bound variable and body.
-pub fn BoolSyntax::dest_ex_unique(fm : @terms.Term) -> (@terms.Term, @terms.Term) {
+pub fn BoolSyntax::dest_ex_unique(
+  fm : @terms.Term,
+) -> (@terms.Term, @terms.Term) {
   boolsyntax_dest_binop("dest_ex_unique", BoolSyntax::ex_unique(), fm)
 }
 

@@ -67,7 +67,7 @@ test "kernel: refl, assume, eqMp" {
   assert_eq(th_eq.hyps.length(), 0)
 
   // p |- p
-  let th_p = @logic.Kernel::assume(p)
+  let th_p = @logic.Kernel::assume_(p)
   assert_eq(th_p.hyps.length(), 1)
 
   // eqMp (|- p = p) (p |- p) => p |- p
@@ -201,7 +201,7 @@ test "Equal: sym and trans" {
   let z = @terms.mk_var("z", a)
 
   // x = y |- x = y
-  let th_xy = @logic.Kernel::assume(@terms.Term::mk_eq(x, y))
+  let th_xy = @logic.Kernel::assume_(@terms.Term::mk_eq(x, y))
 
   // sym: x = y |- y = x
   let sym_th = @logic.Equal::sym(th_xy)
@@ -210,7 +210,7 @@ test "Equal: sym and trans" {
   assert_true(rhs == x)
 
   // trans: {x = y, y = z} |- x = z
-  let th_yz = @logic.Kernel::assume(@terms.Term::mk_eq(y, z))
+  let th_yz = @logic.Kernel::assume_(@terms.Term::mk_eq(y, z))
   let trans_th = @logic.Equal::trans(th_xy, th_yz)
   let (tl, tr) = @terms.Term::dest_eq(trans_th.concl)
   assert_true(tl == x)

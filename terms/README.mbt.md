@@ -162,10 +162,7 @@ test "terms: type instantiation" {
   // Instantiate 'a := bool
   let sigma : @types.TypeSubst = Subst(pairs=[(a, bool_ty)])
   let eq_bool = eq.inst(sigma)
-  let expected = @types.mk_fun(
-    bool_ty,
-    @types.mk_fun(bool_ty, bool_ty),
-  )
+  let expected = @types.mk_fun(bool_ty, @types.mk_fun(bool_ty, bool_ty))
   assert_true(eq_bool.type_of() == expected)
 }
 ```

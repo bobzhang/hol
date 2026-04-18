@@ -5,6 +5,7 @@ import {
   "bobzhang/hol/foundation",
   "bobzhang/hol/terms",
   "bobzhang/hol/types",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -63,7 +64,7 @@ pub enum Kernel {
 }
 pub fn Kernel::absThm(@terms.Term, Thm) -> Thm raise
 pub fn Kernel::appThm(Thm, Thm) -> Thm raise
-pub fn Kernel::assume(@terms.Term) -> Thm
+pub fn Kernel::assume_(@terms.Term) -> Thm
 pub fn Kernel::betaConv(@terms.Term, @terms.Term) -> Thm
 pub fn Kernel::deductAntisym(Thm, Thm) -> Thm
 pub fn Kernel::defineConst(String, @terms.Term) -> Thm
@@ -80,8 +81,7 @@ pub struct Thm {
   concl : @terms.Term
 
   fn new(Array[@terms.Term], @terms.Term) -> Thm
-}
-pub impl Eq for Thm
+} derive(Eq, @debug.Debug)
 pub impl Show for Thm
 
 // Type aliases

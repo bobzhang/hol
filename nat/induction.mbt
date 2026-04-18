@@ -28,12 +28,10 @@ pub fn Nat::induction(
   base~ : @hol.Thm,
   step~ : @hol.Thm,
   v~ : @hol.Term,
-  prop~ : @hol.Term
+  prop~ : @hol.Term,
 ) -> @hol.Thm {
   // Validate induction variable type
-  guard v is FVar(_, ty) else {
-    abort("induction: v must be a free variable")
-  }
+  guard v is FVar(_, ty) else { abort("induction: v must be a free variable") }
   if ty != nat_ty() {
     abort("induction: v must have type nat")
   }

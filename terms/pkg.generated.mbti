@@ -23,7 +23,7 @@ pub enum Term {
   Const(String, @types.Type)
   App(Term, Term)
   Abs(Term, Term)
-}
+} derive(Compare, Eq, @debug.Debug)
 pub fn Term::aconv(Self, Self) -> Bool
 pub fn Term::curry_eq(Self) -> Self
 pub fn Term::dest_abs(Self) -> (Self, Self)
@@ -40,10 +40,7 @@ pub fn Term::pprint(Self) -> String
 pub fn Term::reset_table() -> Unit
 pub fn Term::subst(Self, @foundation.Subst[Self, Self]) -> Self
 pub fn Term::type_of(Self) -> @types.Type
-pub impl Compare for Term
-pub impl Eq for Term
 pub impl Show for Term
-pub impl @debug.Debug for Term
 
 // Type aliases
 pub type TermMatchResult = (@foundation.Subst[Term, Term], @foundation.Subst[@types.Type, @types.Type])

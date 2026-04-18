@@ -15,13 +15,12 @@ pub struct Subst[A, B] {
   // private fields
 
   fn[A, B] new(pairs? : ArrayView[(A, B)]) -> Subst[A, B]
-}
+} derive(@debug.Debug)
 pub fn[A, B] Subst::add(Self[A, B], A, B) -> Self[A, B]
 pub fn[A : Eq, B] Subst::contains(Self[A, B], A) -> Bool
 pub fn[A, B] Subst::is_empty(Self[A, B]) -> Bool
 pub fn[A, B] Subst::iter(Self[A, B]) -> Iter[(A, B)]
 pub fn[A : Eq, B] Subst::lookup(Self[A, B], A) -> B?
-pub impl[A : @debug.Debug, B : @debug.Debug] @debug.Debug for Subst[A, B]
 
 // Type aliases
 

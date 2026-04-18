@@ -30,7 +30,7 @@ pub struct Thm {
   concl : @terms.Term
 
   fn new(Array[@terms.Term], @terms.Term) -> Thm
-} derive(Eq, Show)
+} derive(Eq, Debug)
 
 ///|
 fn Thm::new(hyps : Array[@terms.Term], concl : @terms.Term) -> Thm {
@@ -59,7 +59,10 @@ fn kernel_hyp_contains(t : @terms.Term, hyps : Array[@terms.Term]) -> Bool {
 }
 
 ///|
-fn kernel_insert_hyp(t : @terms.Term, hyps : Array[@terms.Term]) -> Array[@terms.Term] {
+fn kernel_insert_hyp(
+  t : @terms.Term,
+  hyps : Array[@terms.Term],
+) -> Array[@terms.Term] {
   if kernel_hyp_contains(t, hyps) {
     hyps
   } else {
@@ -68,12 +71,18 @@ fn kernel_insert_hyp(t : @terms.Term, hyps : Array[@terms.Term]) -> Array[@terms
 }
 
 ///|
-fn kernel_rm_hyp(t : @terms.Term, hyps : Array[@terms.Term]) -> Array[@terms.Term] {
+fn kernel_rm_hyp(
+  t : @terms.Term,
+  hyps : Array[@terms.Term],
+) -> Array[@terms.Term] {
   hyps.filter(h => t != h)
 }
 
 ///|
-fn kernel_union_hyps(gammas : Array[@terms.Term], deltas : Array[@terms.Term]) -> Array[@terms.Term] {
+fn kernel_union_hyps(
+  gammas : Array[@terms.Term],
+  deltas : Array[@terms.Term],
+) -> Array[@terms.Term] {
   // Treat hypotheses as a set represented by an Array.
   let mut out = deltas
   for g in gammas {
@@ -83,12 +92,18 @@ fn kernel_union_hyps(gammas : Array[@terms.Term], deltas : Array[@terms.Term]) -
 }
 
 ///|
-fn kernel_subst_hyps(s : @terms.TermSubst, hs : Array[@terms.Term]) -> Array[@terms.Term] {
+fn kernel_subst_hyps(
+  s : @terms.TermSubst,
+  hs : Array[@terms.Term],
+) -> Array[@terms.Term] {
   hs.map(h => h.subst(s))
 }
 
 ///|
-fn kernel_inst_hyps(s : @types.TypeSubst, hs : Array[@terms.Term]) -> Array[@terms.Term] {
+fn kernel_inst_hyps(
+  s : @types.TypeSubst,
+  hs : Array[@terms.Term],
+) -> Array[@terms.Term] {
   hs.map(h => h.inst(s))
 }
 
@@ -109,7 +124,7 @@ test "Kernel::refl" {
 
 ///|
 /// Assumption: `phi |- phi`.
-pub fn Kernel::assume(phi : @terms.Term) -> Thm {
+pub fn Kernel::assume_(phi : @terms.Term) -> Thm {
   if !phi.is_bool() {
     abort("assume: expected formula")
   }
@@ -117,9 +132,9 @@ pub fn Kernel::assume(phi : @terms.Term) -> Thm {
 }
 
 ///|
-test "Kernel::assume" {
+test "Kernel::assume_" {
   let p = @terms.mk_var("p", @types.bool_ty())
-  let th = Kernel::assume(p)
+  let th = Kernel::assume_(p)
   assert_eq(th.hyps.length(), 1)
   assert_true(th.hyps[0] == p && th.concl == p)
 }
@@ -137,11 +152,14 @@ pub fn Kernel::eqMp(th1 : Thm, th2 : Thm) -> Thm raise {
 ///|
 /// Abstraction: from `A |- t = u`, derive `A |- (\v. t) = (\v. u)`.
 pub fn Kernel::absThm(v : @terms.Term, th : Thm) -> Thm raise {
-  if not(v is FVar(_, _)) {
+  if !(v is FVar(_, _)) {
     abort("absThm: expected free variable")
   }
   let (lhs, rhs) = th.concl.dest_eq()
-  Thm(th.hyps, @terms.Term::mk_eq(@terms.Term::mk_abs(v, lhs), @terms.Term::mk_abs(v, rhs)))
+  Thm(
+    th.hyps,
+    @terms.Term::mk_eq(@terms.Term::mk_abs(v, lhs), @terms.Term::mk_abs(v, rhs)),
+  )
 }
 
 ///|
@@ -236,12 +254,21 @@ pub fn Kernel::defineTypeOp(
   let r = @terms.mk_var("r", ty)
 
   (
-    Thm([], @terms.Term::mk_eq(@terms.mk_app(abs_const, @terms.mk_app(rep_const, a)), a)),
+    Thm(
+      [],
+      @terms.Term::mk_eq(
+        @terms.mk_app(abs_const, @terms.mk_app(rep_const, a)),
+        a,
+      ),
+    ),
     Thm(
       [],
       @terms.Term::mk_eq(
         @terms.mk_app(p, r),
-        @terms.Term::mk_eq(@terms.mk_app(rep_const, @terms.mk_app(abs_const, r)), r),
+        @terms.Term::mk_eq(
+          @terms.mk_app(rep_const, @terms.mk_app(abs_const, r)),
+          r,
+        ),
       ),
     ),
   )
@@ -256,4 +283,10 @@ pub fn Kernel::new_axiom(fm : @terms.Term) -> Thm {
   let th = Thm([], fm)
   kernel_axioms.val = [th, ..kernel_axioms.val]
   th
+}
+
+///|
+pub impl Show for Thm with output(self, logger) {
+  let hyps_str = self.hyps.map(h => h.pprint()).join(", ")
+  logger.write_string("\{hyps_str} |- \{self.concl.pprint()}")
 }

@@ -29,7 +29,7 @@ pub enum Term {
   // Lambda abstraction; the first field is a binder annotation (FVar) kept
   // for name/type information, while the body uses BVar for references
   Abs(Term, Term)
-} derive(Eq, Compare, Show, Debug)
+} derive(Eq, Compare, Debug)
 
 ///|
 /// A substitution mapping terms to terms, used to replace free variables in a term.
@@ -369,4 +369,9 @@ test "Term: construction and predicates" {
   // type_of and is_bool
   assert_true(x.type_of() == bool_ty)
   assert_true(x.is_bool())
+}
+
+///|
+pub impl Show for Term with output(self, logger) {
+  logger.write_string(self.pprint())
 }

@@ -15,11 +15,8 @@
 
 ///|
 /// Specialize free variables in a theorem via termSubst.
-fn specialize(
-  th : @hol.Thm,
-  pairs : Array[(@hol.Term, @hol.Term)]
-) -> @hol.Thm {
-  @hol.Kernel::termSubst(Subst(pairs=pairs[:]), th)
+fn specialize(th : @hol.Thm, pairs : Array[(@hol.Term, @hol.Term)]) -> @hol.Thm {
+  @hol.Kernel::termSubst(Subst(pairs~), th)
 }
 
 ///|
@@ -74,7 +71,7 @@ pub fn Nat::plus_assoc() -> @hol.Thm raise {
 
   // Step 2: SUC(plus(plus(n,m), k)) = SUC(plus(n, plus(m, k)))
   //   from IH by congruence under SUC: apTerm(SUC, IH)
-  let ih = @hol.Kernel::assume(ih_formula)
+  let ih = @hol.Kernel::assume_(ih_formula)
   let s2 = @hol.Equal::apTerm(suc(), ih)
 
   // Step 3: plus(m, SUC(k)) = SUC(plus(m, k))

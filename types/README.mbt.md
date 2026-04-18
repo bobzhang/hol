@@ -95,8 +95,14 @@ test "types: substitution replaces type variables" {
   assert_eq(@types.Type::pprint(list_a.subst(sigma)), "bool list")
 
   // Substitute in a function type
-  let sigma2 : @types.TypeSubst = Subst(pairs=[(a, @types.bool_ty()), (b, @types.ind_ty())])
-  assert_eq(@types.Type::pprint(@types.mk_fun(a, b).subst(sigma2)), "bool --> ind")
+  let sigma2 : @types.TypeSubst = Subst(pairs=[
+    (a, @types.bool_ty()),
+    (b, @types.ind_ty()),
+  ])
+  assert_eq(
+    @types.Type::pprint(@types.mk_fun(a, b).subst(sigma2)),
+    "bool --> ind",
+  )
 }
 ```
 
