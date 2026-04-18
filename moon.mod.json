@@ -1,10 +1,14 @@
 {
   "name": "bobzhang/hol",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "readme": "README.mbt.md",
   "repository": "",
   "license": "MIT",
-  "keywords": ["hol", "theorem-prover", "moonbit"],
+  "keywords": [
+    "hol",
+    "theorem-prover",
+    "moonbit"
+  ],
   "description": "HOL theorem prover in MoonBit",
   "warn-list": "+unnecessary_annotation"
 }
