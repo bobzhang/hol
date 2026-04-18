@@ -22,8 +22,11 @@ jobs:
       - name: Update dependencies
         run: moon update
 
-      - name: Check
-        run: moon check
+      - name: Format diff
+        run: moon fmt && git diff --exit-code
+
+      - name: Check (warnings are errors)
+        run: moon check --deny-warn
 
       - name: Test
         run: moon test
