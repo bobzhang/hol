@@ -26,4 +26,3 @@ let checkpoint_const_table : Ref[@sorted_map.SortedMap[String, @types.Type]] = {
 pub fn Term::reset_table() -> Unit {
   const_table.val = checkpoint_const_table.val
 }
-

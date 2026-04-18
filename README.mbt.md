@@ -132,7 +132,9 @@ test "types: registering list and building list types" {
   assert_eq(@hol.Type::pprint(list_a), "'a list")
 
   // Nested: ('a -> bool) list
-  let pred_list = @hol.Type::mk_type("list", [@types.mk_fun(a, @types.bool_ty())])
+  let pred_list = @hol.Type::mk_type("list", [
+    @types.mk_fun(a, @types.bool_ty()),
+  ])
   assert_eq(@hol.Type::pprint(pred_list), "'a --> bool list")
 }
 ```
@@ -616,7 +618,7 @@ test "kernel: assume" {
   let p = @terms.mk_var("p", @types.bool_ty())
 
   // p |- p
-  let th = @hol.Kernel::assume(p)
+  let th = @hol.Kernel::assume_(p)
   assert_eq(th.hyps.length(), 1)
   assert_true(th.hyps[0] == p)
   assert_true(th.concl == p)
@@ -638,7 +640,7 @@ test "kernel: eqMp" {
 
   //  |- p = p  (from refl)  and  p |- p  (from assume)
   let th_eq = @hol.Kernel::refl(p) // |- p = p
-  let th_p = @hol.Kernel::assume(p) // p |- p
+  let th_p = @hol.Kernel::assume_(p) // p |- p
 
   // p |- p  (by eqMp with trivial equation)
   let th = @hol.Kernel::eqMp(th_eq, th_p)
@@ -711,8 +713,8 @@ test "kernel: deductAntisym" {
   let q = @terms.mk_var("q", @types.bool_ty())
 
   // p |- p  and  q |- q
-  let th_p = @hol.Kernel::assume(p)
-  let th_q = @hol.Kernel::assume(q)
+  let th_p = @hol.Kernel::assume_(p)
+  let th_q = @hol.Kernel::assume_(q)
 
   // {p}\{q} U {q}\{p} |- p = q  =>  {p, q} |- p = q
   let th = @hol.Kernel::deductAntisym(th_p, th_q)
@@ -836,7 +838,7 @@ test "derived: sym" {
 
   // x = y |- x = y
   let eq_xy = @hol.Term::mk_eq(x, y)
-  let th = @hol.Kernel::assume(eq_xy)
+  let th = @hol.Kernel::assume_(eq_xy)
 
   // x = y |- y = x
   let sym_th = @hol.Equal::sym(th)
@@ -877,8 +879,8 @@ test "derived: trans" {
   let z = @terms.mk_var("z", a)
 
   // x = y |- x = y  and  y = z |- y = z
-  let th1 = @hol.Kernel::assume(@hol.Term::mk_eq(x, y))
-  let th2 = @hol.Kernel::assume(@hol.Term::mk_eq(y, z))
+  let th1 = @hol.Kernel::assume_(@hol.Term::mk_eq(x, y))
+  let th2 = @hol.Kernel::assume_(@hol.Term::mk_eq(y, z))
 
   // {x = y, y = z} |- x = z
   let th = @hol.Equal::trans(th1, th2)
@@ -907,7 +909,7 @@ test "derived: apTerm and apThm" {
   let g = @terms.mk_var("g", @types.mk_fun(a, a))
 
   // x = y |- x = y
-  let th_xy = @hol.Kernel::assume(@hol.Term::mk_eq(x, y))
+  let th_xy = @hol.Kernel::assume_(@hol.Term::mk_eq(x, y))
 
   // apTerm f (x = y |- x = y)  =>  x = y |- f x = f y
   let th1 = @hol.Equal::apTerm(f, th_xy)
@@ -916,7 +918,7 @@ test "derived: apTerm and apThm" {
   assert_true(rhs1 is App(_, _))
 
   // f = g |- f = g
-  let th_fg = @hol.Kernel::assume(@hol.Term::mk_eq(f, g))
+  let th_fg = @hol.Kernel::assume_(@hol.Term::mk_eq(f, g))
 
   // apThm x (f = g |- f = g)  =>  f = g |- f x = g x
   let th2 = @hol.Equal::apThm(x, th_fg)
@@ -944,8 +946,8 @@ test "derived: mkBinop" {
   let q2 = @terms.mk_var("q2", bool_ty)
 
   // p1 = p2 |- p1 = p2  and  q1 = q2 |- q1 = q2
-  let lth = @hol.Kernel::assume(@hol.Term::mk_eq(p1, p2))
-  let rth = @hol.Kernel::assume(@hol.Term::mk_eq(q1, q2))
+  let lth = @hol.Kernel::assume_(@hol.Term::mk_eq(p1, p2))
+  let rth = @hol.Kernel::assume_(@hol.Term::mk_eq(q1, q2))
 
   // Use the implication connective as the binary operator
   let op = @hol.BoolSyntax::implication()
@@ -1023,7 +1025,7 @@ test "worked example: combining packages" {
   assert_eq(refl_id.hyps.length(), 0)
 
   // Prove p |- p  (assumption)
-  let assume_p = @hol.Kernel::assume(p)
+  let assume_p = @hol.Kernel::assume_(p)
   assert_eq(assume_p.hyps.length(), 1)
 
   // Prove |- (\p. p) p = p  (beta reduction)

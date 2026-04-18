@@ -39,19 +39,13 @@ fn suc() -> @hol.Term {
 ///|
 /// The constant `plus : nat -> nat -> nat`.
 fn plus() -> @hol.Term {
-  @hol.const_(
-    "plus",
-    @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
-  )
+  @hol.const_("plus", @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())))
 }
 
 ///|
 /// The constant `mult : nat -> nat -> nat`.
 fn mult() -> @hol.Term {
-  @hol.const_(
-    "mult",
-    @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
-  )
+  @hol.const_("mult", @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())))
 }
 
 ///|
@@ -91,14 +85,18 @@ pub fn Nat::setup() -> (@hol.Thm, @hol.Thm, @hol.Thm, @hol.Thm) {
   // Register constants
   ignore(@hol.Term::new_const("0", nat_ty()))
   ignore(@hol.Term::new_const("SUC", @hol.mk_fun(nat_ty(), nat_ty())))
-  ignore(@hol.Term::new_const(
-    "plus",
-    @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
-  ))
-  ignore(@hol.Term::new_const(
-    "mult",
-    @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
-  ))
+  ignore(
+    @hol.Term::new_const(
+      "plus",
+      @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
+    ),
+  )
+  ignore(
+    @hol.Term::new_const(
+      "mult",
+      @hol.mk_fun(nat_ty(), @hol.mk_fun(nat_ty(), nat_ty())),
+    ),
+  )
   // Free variables for axioms
   let n = @hol.mk_var("n", nat_ty())
   let m = @hol.mk_var("m", nat_ty())

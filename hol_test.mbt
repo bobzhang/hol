@@ -82,7 +82,7 @@ test "kernel: refl/assume/eqMp" {
   setup_hol_tables()
   let p = @terms.mk_var("p", @types.bool_ty())
   let th_eq = @logic.Kernel::refl(p)
-  let th_p = @logic.Kernel::assume(p)
+  let th_p = @logic.Kernel::assume_(p)
   let th = @logic.Kernel::eqMp(th_eq, th_p)
   assert_true(th.concl == p)
 }

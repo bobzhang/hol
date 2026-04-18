@@ -13,10 +13,7 @@
 ///|
 /// Lemma: `|- plus(plus(a, b), c) = plus(a, plus(b, c))` by induction on c.
 /// (Reproved here for use in mult_dist, independent of plus_assoc.mbt.)
-fn plus_assoc_lemma(
-  plus_0 : @hol.Thm,
-  plus_suc : @hol.Thm
-) -> @hol.Thm raise {
+fn plus_assoc_lemma(plus_0 : @hol.Thm, plus_suc : @hol.Thm) -> @hol.Thm raise {
   let a = @hol.mk_var("a", nat_ty())
   let b = @hol.mk_var("b", nat_ty())
   let c = @hol.mk_var("c", nat_ty())
@@ -44,7 +41,7 @@ fn plus_assoc_lemma(
   //   plus(plus(a,b), SUC(c)) = SUC(plus(plus(a,b), c))
   let s1 = specialize(plus_suc, [(n, mk_plus(a, b)), (m, c)])
   //   IH
-  let ih = @hol.Kernel::assume(prop)
+  let ih = @hol.Kernel::assume_(prop)
   //   SUC(plus(plus(a,b), c)) = SUC(plus(a, plus(b, c)))
   let s2 = @hol.Equal::apTerm(suc(), ih)
   //   plus(b, SUC(c)) = SUC(plus(b, c))
@@ -103,10 +100,7 @@ pub fn Nat::mult_dist() -> @hol.Thm raise {
   //   mult(a, 0) = 0   from MULT_0 with n := a
   let rb1 = specialize(mult_0, [(n, a)])
   //   plus(mult(a, b), mult(a, 0)) = plus(mult(a, b), 0)   congruence
-  let rb2 = @hol.Equal::apTerm(
-    @hol.mk_app(plus(), mk_mult(a, b)),
-    rb1,
-  )
+  let rb2 = @hol.Equal::apTerm(@hol.mk_app(plus(), mk_mult(a, b)), rb1)
   //   plus(mult(a, b), 0) = mult(a, b)   from PLUS_0 with n := mult(a, b)
   let rb3 = specialize(plus_0, [(n, mk_mult(a, b))])
   //   plus(mult(a, b), mult(a, 0)) = mult(a, b)
@@ -122,7 +116,7 @@ pub fn Nat::mult_dist() -> @hol.Thm raise {
   // Goal: mult(a, plus(b, SUC(c))) = plus(mult(a, b), mult(a, SUC(c)))
   // ================================================================
 
-  let ih = @hol.Kernel::assume(dist_prop)
+  let ih = @hol.Kernel::assume_(dist_prop)
 
   // LHS chain: mult(a, plus(b, SUC(c)))
   //   Step 1: plus(b, SUC(c)) = SUC(plus(b, c))   from PLUS_SUC with n := b, m := c
@@ -145,10 +139,7 @@ pub fn Nat::mult_dist() -> @hol.Thm raise {
   //   mult(a, SUC(c)) = plus(mult(a, c), a)   from MULT_SUC with n := a, m := c
   let r1 = specialize(mult_suc, [(n, a), (m, c)])
   //   plus(mult(a, b), mult(a, SUC(c))) = plus(mult(a, b), plus(mult(a, c), a))
-  let r2 = @hol.Equal::apTerm(
-    @hol.mk_app(plus(), mk_mult(a, b)),
-    r1,
-  )
+  let r2 = @hol.Equal::apTerm(@hol.mk_app(plus(), mk_mult(a, b)), r1)
 
   // Now we need:
   //   LHS = plus(plus(mult(a,b), mult(a,c)), a)
@@ -156,10 +147,11 @@ pub fn Nat::mult_dist() -> @hol.Thm raise {
   // These are equal by plus_assoc with a := mult(a,b), b := mult(a,c), c := a
   // plus_assoc_lemma: |- plus(plus(a, b), c) = plus(a, plus(b, c))
   // Specialize with a := mult(a,b), b := mult(a,c), c := a
-  let assoc_inst = specialize(
-    passoc,
-    [(a, mk_mult(a, b)), (b, mk_mult(a, c)), (c, a)],
-  )
+  let assoc_inst = specialize(passoc, [
+    (a, mk_mult(a, b)),
+    (b, mk_mult(a, c)),
+    (c, a),
+  ])
   // assoc_inst: plus(plus(mult(a,b), mult(a,c)), a) = plus(mult(a,b), plus(mult(a,c), a))
 
   // Chain: mult(a, plus(b, SUC(c)))
