@@ -13,9 +13,8 @@ pub fn[A : Compare] dedup_sort(Array[A]) -> Array[A]
 // Types and methods
 pub struct Subst[A, B] {
   // private fields
-
-  fn[A, B] new(pairs? : ArrayView[(A, B)]) -> Subst[A, B]
 } derive(@debug.Debug)
+pub fn[A, B] Subst::Subst(pairs? : ArrayView[(A, B)]) -> Self[A, B]
 pub fn[A, B] Subst::add(Self[A, B], A, B) -> Self[A, B]
 pub fn[A : Eq, B] Subst::contains(Self[A, B], A) -> Bool
 pub fn[A, B] Subst::is_empty(Self[A, B]) -> Bool

@@ -28,12 +28,10 @@
 pub struct Thm {
   hyps : Array[@terms.Term]
   concl : @terms.Term
-
-  fn new(Array[@terms.Term], @terms.Term) -> Thm
 } derive(Eq, Debug)
 
 ///|
-fn Thm::new(hyps : Array[@terms.Term], concl : @terms.Term) -> Thm {
+fn Thm::Thm(hyps : Array[@terms.Term], concl : @terms.Term) -> Thm {
   { hyps, concl }
 }
 
