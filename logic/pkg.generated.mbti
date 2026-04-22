@@ -79,8 +79,6 @@ pub fn Kernel::typeSubst(@foundation.Subst[@types.Type, @types.Type], Thm) -> Th
 pub struct Thm {
   hyps : Array[@terms.Term]
   concl : @terms.Term
-
-  fn new(Array[@terms.Term], @terms.Term) -> Thm
 } derive(Eq, @debug.Debug)
 pub impl Show for Thm
 
