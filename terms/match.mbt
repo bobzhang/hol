@@ -62,11 +62,11 @@ fn term_raw_match_rec(
       if c1 != c2 {
         abort("match_term: different constants")
       }
-      let next_ty_state = ty1.match_type(ty2, { subst: ty_s, tyvars: ty_fixed })
+      let next_ty_state = ty1.match_type(ty2, { subst: ty_s, tyvars: ty_fixed, })
       (tm_s, next_ty_state.subst)
     }
     (Abs(FVar(_, ty1), m), Abs(FVar(_, ty2), n)) => {
-      let next_ty_state = ty1.match_type(ty2, { subst: ty_s, tyvars: ty_fixed })
+      let next_ty_state = ty1.match_type(ty2, { subst: ty_s, tyvars: ty_fixed, })
       term_raw_match_rec(
         m,
         n,

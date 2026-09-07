@@ -49,4 +49,3 @@ pub using @types {type TypeMatchState}
 pub type TypeSubst = @foundation.Subst[@types.Type, @types.Type]
 
 // Traits
-

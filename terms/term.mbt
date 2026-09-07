@@ -32,6 +32,15 @@ pub enum Term {
 } derive(Eq, Compare, Debug)
 
 ///|
+pub extend Term with Eq::{not_equal, equal}
+
+///|
+pub extend Term with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+pub extend Term with Debug::{to_repr}
+
+///|
 /// A substitution mapping terms to terms, used to replace free variables in a term.
 pub type TermSubst = @foundation.Subst[Term, Term]
 
@@ -68,7 +77,7 @@ pub fn Term::mk_const(name : String, ty : @types.Type) -> Term raise {
     Some(declared_ty) => {
       // Allow polymorphic constants by matching the declared type schema
       // against the requested instance type.
-      ignore(declared_ty.match_type(ty, { subst: Subst(), tyvars: [] }))
+      ignore(declared_ty.match_type(ty, { subst: Subst(), tyvars: [], }))
       Const(name, ty)
     }
   }
@@ -372,6 +381,9 @@ test "Term: construction and predicates" {
 }
 
 ///|
-pub impl Show for Term with output(self, logger) {
+pub impl Show for Term with fn output(self, logger) {
   logger.write_string(self.pprint())
 }
+
+///|
+pub extend Term with Show::{to_string, output}

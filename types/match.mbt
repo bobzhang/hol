@@ -31,9 +31,9 @@ fn type_match_impl(
           let next_state = match type_match_lookup(v, state) {
             None =>
               if v == ty {
-                { ..state, tyvars: [v, ..state.tyvars] }
+                { ..state, tyvars: [v, ..state.tyvars], }
               } else {
-                { ..state, subst: state.subst.add(v, ty) }
+                { ..state, subst: state.subst.add(v, ty), }
               }
             Some(bound) =>
               if bound == ty {

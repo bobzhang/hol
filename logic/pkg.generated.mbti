@@ -80,9 +80,13 @@ pub struct Thm {
   hyps : Array[@terms.Term]
   concl : @terms.Term
 } derive(Eq, @debug.Debug)
+pub fn Thm::equal(Self, Self) -> Bool
+pub fn Thm::not_equal(Self, Self) -> Bool
+pub fn Thm::output(Self, &Logger) -> Unit
+pub fn Thm::to_repr(Self) -> @debug.Repr
+pub fn Thm::to_string(Self) -> String
 pub impl Show for Thm
 
 // Type aliases
 
 // Traits
-

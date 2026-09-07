@@ -53,7 +53,7 @@ pub fn Term::dest_eq(tm : Term) -> (Term, Term) raise {
       ignore(
         equality_term()
         .type_of()
-        .match_type(c.type_of(), { subst: Subst(), tyvars: [] }),
+        .match_type(c.type_of(), { subst: Subst(), tyvars: [], }),
       )
       (lhs, rhs)
     }

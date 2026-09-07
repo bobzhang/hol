@@ -25,6 +25,15 @@ pub enum Type {
 } derive(Eq, Compare, Debug)
 
 ///|
+pub extend Type with Eq::{not_equal, equal}
+
+///|
+pub extend Type with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+pub extend Type with Debug::{to_repr}
+
+///|
 /// A substitution mapping type variables to types.
 pub type TypeSubst = @foundation.Subst[Type, Type]
 
@@ -213,6 +222,9 @@ pub fn Type::vars_in(self : Type) -> Array[Type] {
 }
 
 ///|
-pub impl Show for Type with output(self, logger) {
+pub impl Show for Type with fn output(self, logger) {
   logger.write_string(self.pprint())
 }
+
+///|
+pub extend Type with Show::{to_string, output}

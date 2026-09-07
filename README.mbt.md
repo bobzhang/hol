@@ -186,7 +186,7 @@ test "types: matching" {
   let a = @types.mk_var("'a")
   let bool_ty = @types.bool_ty()
 
-  let empty_state : @hol.TypeMatchState = { subst: Subst(), tyvars: [] }
+  let empty_state : @hol.TypeMatchState = { subst: Subst(), tyvars: [], }
 
   // Match 'a against bool => { 'a := bool }
   let s = a.match_type(bool_ty, empty_state).subst

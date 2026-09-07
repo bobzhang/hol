@@ -25,9 +25,11 @@ pub enum Term {
   Abs(Term, Term)
 } derive(Compare, Eq, @debug.Debug)
 pub fn Term::aconv(Self, Self) -> Bool
+pub fn Term::compare(Self, Self) -> Int
 pub fn Term::curry_eq(Self) -> Self
 pub fn Term::dest_abs(Self) -> (Self, Self)
 pub fn Term::dest_eq(Self) -> (Self, Self) raise
+pub fn Term::equal(Self, Self) -> Bool
 pub fn Term::inst(Self, @foundation.Subst[@types.Type, @types.Type]) -> Self
 pub fn Term::is_bool(Self) -> Bool
 pub fn Term::is_eq(Self) -> Bool
@@ -36,9 +38,17 @@ pub fn Term::mk_abs(Self, Self) -> Self
 pub fn Term::mk_const(String, @types.Type) -> Self raise
 pub fn Term::mk_eq(Self, Self) -> Self
 pub fn Term::new_const(String, @types.Type) -> Self
+pub fn Term::not_equal(Self, Self) -> Bool
+pub fn Term::op_ge(Self, Self) -> Bool
+pub fn Term::op_gt(Self, Self) -> Bool
+pub fn Term::op_le(Self, Self) -> Bool
+pub fn Term::op_lt(Self, Self) -> Bool
+pub fn Term::output(Self, &Logger) -> Unit
 pub fn Term::pprint(Self) -> String
 pub fn Term::reset_table() -> Unit
 pub fn Term::subst(Self, @foundation.Subst[Self, Self]) -> Self
+pub fn Term::to_repr(Self) -> @debug.Repr
+pub fn Term::to_string(Self) -> String
 pub fn Term::type_of(Self) -> @types.Type
 pub impl Show for Term
 
@@ -48,4 +58,3 @@ pub type TermMatchResult = (@foundation.Subst[Term, Term], @foundation.Subst[@ty
 pub type TermSubst = @foundation.Subst[Term, Term]
 
 // Traits
-

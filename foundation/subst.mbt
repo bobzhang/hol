@@ -16,6 +16,9 @@ pub struct Subst[A, B] {
 } derive(Debug)
 
 ///|
+pub extend Subst with Debug::{to_repr}
+
+///|
 /// Construct a `Subst[A, B]` from an optional array of `(redex, residue)`
 /// pairs. The array order is preserved, and `lookup` returns the first
 /// matching pair — earliest-entry-wins on duplicate keys. (The opposite
@@ -23,7 +26,7 @@ pub struct Subst[A, B] {
 /// added binding win; callers building a substitution from an array that
 /// wants `add`-style shadowing should feed pairs into `add` instead.)
 pub fn[A, B] Subst::Subst(pairs? : ArrayView[(A, B)] = []) -> Subst[A, B] {
-  { items: @list.from_array(pairs) }
+  { items: List(pairs), }
 }
 
 ///|
@@ -52,7 +55,7 @@ pub fn[A, B] Subst::add(
   residue : B,
 ) -> Subst[A, B] {
   // Prepend so lookup finds the most recently added mapping first.
-  { items: @list.cons((redex, residue), self.items) }
+  { items: @list.cons((redex, residue), self.items), }
 }
 
 ///|

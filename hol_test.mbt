@@ -20,7 +20,7 @@ test "type: match" {
   setup_hol_tables()
   let a = @types.mk_var("a")
   let bool_t = @types.bool_ty()
-  let state = a.match_type(bool_t, { subst: Subst(), tyvars: [] })
+  let state = a.match_type(bool_t, { subst: Subst(), tyvars: [], })
   assert_true(state.subst.contains(a))
 }
 
