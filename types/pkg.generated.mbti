@@ -24,21 +24,31 @@ pub enum Type {
   TyApp(String, Array[Type])
 } derive(Compare, Eq, @debug.Debug)
 pub fn Type::checkpoint_defs() -> Unit
+pub fn Type::compare(Self, Self) -> Int
 pub fn Type::dest_fun(Self) -> (Self, Self)
 pub fn Type::dest_type(Self) -> (String, Array[Self])
 pub fn Type::dest_var(Self) -> String
 pub fn Type::domain(Self) -> Self
+pub fn Type::equal(Self, Self) -> Bool
 pub fn Type::is_fun(Self) -> Bool
 pub fn Type::is_type(Self) -> Bool
 pub fn Type::is_var(Self) -> Bool
 pub fn Type::match_type(Self, Self, TypeMatchState) -> TypeMatchState raise
 pub fn Type::mk_type(String, Array[Self]) -> Self
 pub fn Type::new_type(String, Int) -> Unit
+pub fn Type::not_equal(Self, Self) -> Bool
+pub fn Type::op_ge(Self, Self) -> Bool
+pub fn Type::op_gt(Self, Self) -> Bool
+pub fn Type::op_le(Self, Self) -> Bool
+pub fn Type::op_lt(Self, Self) -> Bool
+pub fn Type::output(Self, &Logger) -> Unit
 pub fn Type::pprint(Self) -> String
 pub fn Type::range(Self) -> Self
 pub fn Type::reset_table() -> Unit
 pub fn Type::serialize(Self) -> String
 pub fn Type::subst(Self, @foundation.Subst[Self, Self]) -> Self
+pub fn Type::to_repr(Self) -> @debug.Repr
+pub fn Type::to_string(Self) -> String
 pub fn Type::vars_in(Self) -> Array[Self]
 pub impl Show for Type
 
@@ -53,4 +63,3 @@ pub type Env = @sorted_map.SortedMap[String, Int]
 pub type TypeSubst = @foundation.Subst[Type, Type]
 
 // Traits
-

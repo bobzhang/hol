@@ -20,8 +20,8 @@ pub fn[A : Eq, B] Subst::contains(Self[A, B], A) -> Bool
 pub fn[A, B] Subst::is_empty(Self[A, B]) -> Bool
 pub fn[A, B] Subst::iter(Self[A, B]) -> Iter[(A, B)]
 pub fn[A : Eq, B] Subst::lookup(Self[A, B], A) -> B?
+pub fn[A : @debug.Debug, B : @debug.Debug] Subst::to_repr(Self[A, B]) -> @debug.Repr
 
 // Type aliases
 
 // Traits
-

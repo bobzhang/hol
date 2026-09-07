@@ -31,8 +31,14 @@ pub struct Thm {
 } derive(Eq, Debug)
 
 ///|
+pub extend Thm with Eq::{not_equal, equal}
+
+///|
+pub extend Thm with Debug::{to_repr}
+
+///|
 fn Thm::Thm(hyps : Array[@terms.Term], concl : @terms.Term) -> Thm {
-  { hyps, concl }
+  { hyps, concl, }
 }
 
 ///|
@@ -40,7 +46,7 @@ fn Thm::Thm(hyps : Array[@terms.Term], concl : @terms.Term) -> Thm {
 pub enum Kernel {}
 
 ///|
-let kernel_axioms : Ref[Array[Thm]] = { val: [] }
+let kernel_axioms : Ref[Array[Thm]] = { val: [], }
 
 ///|
 /// Clear all registered axioms.
@@ -284,7 +290,10 @@ pub fn Kernel::new_axiom(fm : @terms.Term) -> Thm {
 }
 
 ///|
-pub impl Show for Thm with output(self, logger) {
+pub impl Show for Thm with fn output(self, logger) {
   let hyps_str = self.hyps.map(h => h.pprint()).join(", ")
   logger.write_string("\{hyps_str} |- \{self.concl.pprint()}")
 }
+
+///|
+pub extend Thm with Show::{to_string, output}
