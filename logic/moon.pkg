@@ -1,5 +1,4 @@
 import {
-  "bobzhang/hol/foundation",
   "bobzhang/hol/types",
   "bobzhang/hol/terms",
 }
