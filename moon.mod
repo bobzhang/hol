@@ -4,7 +4,7 @@ version = "0.1.3"
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://github.com/bobzhang/hol"
 
 license = "MIT"
 
