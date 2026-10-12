@@ -25,7 +25,7 @@ pub extend Subst with Debug::{to_repr}
 /// of `Subst::add`, which prepends and therefore makes the most recently
 /// added binding win; callers building a substitution from an array that
 /// wants `add`-style shadowing should feed pairs into `add` instead.)
-pub fn[A, B] Subst::Subst(pairs? : ArrayView[(A, B)] = []) -> Subst[A, B] {
+pub fn[A, B] Subst::Subst(pairs~ : ArrayView[(A, B)] = []) -> Subst[A, B] {
   { items: List(pairs), }
 }
 

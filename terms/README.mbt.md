@@ -12,7 +12,7 @@ The HOL term language.  Terms form a simply-typed lambda calculus
 ///|
 enum Term {
   FVar(String, Type) // free (named) variable with its type
-  BVar(Int) // bound variable (de Bruijn index)
+  BVar(Int32) // bound variable (de Bruijn index)
   Const(String, Type) // declared constant (e.g., "=")
   App(Term, Term) // function application
   Abs(Term, Term) // lambda abstraction
