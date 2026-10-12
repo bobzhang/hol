@@ -21,7 +21,7 @@ pub enum Term {
   // Named free variable with its type
   FVar(String, @types.Type)
   // De Bruijn index for a bound variable (0 = innermost binder)
-  BVar(Int)
+  BVar(Int32)
   // Declared constant (e.g., "=" with polymorphic type)
   Const(String, @types.Type)
   // Function application
@@ -107,7 +107,7 @@ pub fn Term::mk_abs(x : Term, m : Term) -> Term {
   // Locally-nameless encoding: convert free occurrences of `x` into BVar(idx).
   // Under each nested Abs, the index increments so that BVar always refers to
   // the correct binder level.
-  fn abs_iter(idx : Int, x : Term, m : Term) -> Term {
+  fn abs_iter(idx : Int32, x : Term, m : Term) -> Term {
     match m {
       FVar(_, _) as y => if x == y { BVar(idx) } else { y }
       BVar(_) => m
@@ -177,7 +177,7 @@ pub fn Term::dest_abs(self : Term) -> (Term, Term) {
   }
   // Replace both free occurrences of `old` and `BVar(idx)` with `new`,
   // incrementing the index under each nested Abs.
-  fn replace_with(old : Term, new : Term, idx : Int, m : Term) -> Term {
+  fn replace_with(old : Term, new : Term, idx : Int32, m : Term) -> Term {
     match old {
       FVar(_, _) =>
         match m {

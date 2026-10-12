@@ -39,7 +39,7 @@ pub type TypeSubst = @foundation.Subst[Type, Type]
 
 ///|
 /// Register a new type constructor with the given name and arity in the global type table.
-pub fn Type::new_type(name : String, arity : Int) -> Unit {
+pub fn Type::new_type(name : String, arity : Int32) -> Unit {
   type_table.val = type_table.val.add(name, arity)
 }
 

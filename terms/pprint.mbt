@@ -1,5 +1,5 @@
 ///|
-fn term_pp_lookup(i : Int, names : Array[String]) -> String {
+fn term_pp_lookup(i : Int32, names : Array[String]) -> String {
   match names.get(i) {
     Some(x) => x
     None => abort("pprint: cannot find name for bound variable")

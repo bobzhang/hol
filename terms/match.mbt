@@ -11,7 +11,7 @@ fn term_lookup_match(x : Term, ids : Array[Term], s : TermSubst) -> Term? {
 }
 
 ///|
-fn term_free_under(m : Term, depth : Int) -> Bool {
+fn term_free_under(m : Term, depth : Int32) -> Bool {
   match m {
     BVar(i) => i < depth
     App(p, q) => term_free_under(p, depth) && term_free_under(q, depth)

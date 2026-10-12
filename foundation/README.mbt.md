@@ -23,7 +23,7 @@ Substitutions are used for:
 ```mbt check
 ///|
 test "Subst: add, lookup, and shadowing" {
-  let s : @foundation.Subst[String, Int] = Subst()
+  let s : @foundation.Subst[String, Int32] = Subst()
   assert_true(s.is_empty())
 
   let s2 = s.add("x", 1).add("y", 2)

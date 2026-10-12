@@ -1,6 +1,6 @@
 ///|
 /// Type-constructor environment mapping names to their arities.
-pub type Env = @sorted_map.SortedMap[String, Int]
+pub type Env = @sorted_map.SortedMap[String, Int32]
 
 ///|
 // The initial registry contains two primitive types:

@@ -1,5 +1,5 @@
 ///|
-fn term_lookup_bvar(i : Int, tys : Array[@types.Type]) -> @types.Type {
+fn term_lookup_bvar(i : Int32, tys : Array[@types.Type]) -> @types.Type {
   match tys.get(i) {
     Some(ty) => ty
     None => abort("type_of: cannot find binder type")
