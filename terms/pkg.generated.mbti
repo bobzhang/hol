@@ -17,15 +17,16 @@ pub fn mk_var(String, @types.Type) -> Term
 // Errors
 
 // Types and methods
+#derive(Compare, Eq, @debug.Debug)
 pub enum Term {
   FVar(String, @types.Type)
-  BVar(Int)
+  BVar(Int32)
   Const(String, @types.Type)
   App(Term, Term)
   Abs(Term, Term)
-} derive(Compare, Eq, @debug.Debug)
+}
 pub fn Term::aconv(Self, Self) -> Bool
-pub fn Term::compare(Self, Self) -> Int
+pub fn Term::compare(Self, Self) -> Int32
 pub fn Term::curry_eq(Self) -> Self
 pub fn Term::dest_abs(Self) -> (Self, Self)
 pub fn Term::dest_eq(Self) -> (Self, Self) raise

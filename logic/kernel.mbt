@@ -25,10 +25,11 @@
 
 ///|
 /// A proven theorem, consisting of a set of hypotheses and a conclusion (`hyps |- concl`).
+#derive(Eq, Debug)
 pub struct Thm {
   hyps : Array[@terms.Term]
   concl : @terms.Term
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend Thm with Eq::{not_equal, equal}

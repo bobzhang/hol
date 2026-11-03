@@ -76,10 +76,11 @@ pub fn Kernel::reset_axioms() -> Unit
 pub fn Kernel::termSubst(@foundation.Subst[@terms.Term, @terms.Term], Thm) -> Thm
 pub fn Kernel::typeSubst(@foundation.Subst[@types.Type, @types.Type], Thm) -> Thm
 
+#derive(Eq, @debug.Debug)
 pub struct Thm {
   hyps : Array[@terms.Term]
   concl : @terms.Term
-} derive(Eq, @debug.Debug)
+}
 pub fn Thm::equal(Self, Self) -> Bool
 pub fn Thm::not_equal(Self, Self) -> Bool
 pub fn Thm::output(Self, &Logger) -> Unit

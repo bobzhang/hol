@@ -11,9 +11,10 @@
 
 ///|
 /// An immutable substitution mapping keys of type `A` to values of type `B`, represented as an association list with most-recent-first lookup.
+#derive(Debug)
 pub struct Subst[A, B] {
   priv items : @list.List[(A, B)]
-} derive(Debug)
+}
 
 ///|
 pub extend Subst with Debug::{to_repr}

@@ -17,6 +17,7 @@
 
 ///|
 /// HOL term in locally nameless representation: free variables are named, bound variables use de Bruijn indices, and constants carry their (possibly polymorphic) type.
+#derive(Eq, Compare, Debug)
 pub enum Term {
   // Named free variable with its type
   FVar(String, @types.Type)
@@ -29,7 +30,7 @@ pub enum Term {
   // Lambda abstraction; the first field is a binder annotation (FVar) kept
   // for name/type information, while the body uses BVar for references
   Abs(Term, Term)
-} derive(Eq, Compare, Debug)
+}
 
 ///|
 pub extend Term with Eq::{not_equal, equal}
