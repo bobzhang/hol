@@ -17,12 +17,13 @@
 
 ///|
 /// HOL types: a simply-typed lambda calculus type language with type variables (`Var`) and type constructor applications (`App`).
+#derive(Eq, Compare, Debug)
 pub enum Type {
   // Type variable -- enables polymorphism (e.g., `'a` in `= : 'a -> 'a -> bool`)
   TyVar(String)
   // Type constructor applied to arguments (e.g., `App("fun", [bool, bool])`)
   TyApp(String, Array[Type])
-} derive(Eq, Compare, Debug)
+}
 
 ///|
 pub extend Type with Eq::{not_equal, equal}
