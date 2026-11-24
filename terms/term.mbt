@@ -52,7 +52,7 @@ pub fn Term::new_const(name : String, ty : @types.Type) -> Term {
   if const_table.val.contains(name) {
     abort("new_const: already used \{name}")
   }
-  const_table.val = const_table.val.add(name, ty)
+  const_table.val = const_table.val.insert(name, ty)
   Const(name, ty)
 }
 

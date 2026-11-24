@@ -2,7 +2,7 @@
 // Global signature of constants.  The only primitive constant is polymorphic
 // equality `= : 'a -> 'a -> bool` (the HOL Light approach).  All other
 // connectives (==>, /\, forall, etc.) are defined on top of equality.
-let initial_const_table : @sorted_map.SortedMap[String, @types.Type] = @sorted_map.new().add(
+let initial_const_table : @sorted_map.SortedMap[String, @types.Type] = @sorted_map.empty().insert(
   "=",
   @types.mk_fun(
     @types.mk_var("'a"),
